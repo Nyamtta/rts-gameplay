@@ -7,6 +7,7 @@ namespace roman.demidow.game
     public abstract class Enemy : MonoBehaviour, IDamageable
     {
         [SerializeField] private EnemySettings _enemySettings;
+        [SerializeField] private CharacterType _characterType;
 
         private float _hitPoint;
 
@@ -18,6 +19,11 @@ namespace roman.demidow.game
         public virtual void TakeDamage(DamageType damageType, float damage)
         {
             _hitPoint -= damage;
+        }
+
+        public CharacterType GetCharacterType()
+        {
+            return _characterType;
         }
     }
 }

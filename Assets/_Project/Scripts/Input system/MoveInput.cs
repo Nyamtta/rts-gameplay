@@ -11,6 +11,8 @@ public class MoveInput : MonoBehaviour
     public event Action<Vector3> movePoint;
     private GameObject _pointerArrowGO;
 
+    private const float MAX_RAY_DISTANCE = 500f;
+
     private void Update()
     {
         if(Input.GetMouseButtonDown(1))
@@ -23,7 +25,7 @@ public class MoveInput : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
          
-        if(Physics.Raycast(ray, out RaycastHit hit) == true)
+        if(Physics.Raycast(ray, out RaycastHit hit, MAX_RAY_DISTANCE, _groundLayer) == true)
         {
             Vector3 groundPos = hit.point;
             SetPointerPosition(groundPos);

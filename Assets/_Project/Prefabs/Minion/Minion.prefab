@@ -296,7 +296,8 @@ GameObject:
   - component: {fileID: 7080777279480294011}
   - component: {fileID: 7080777279480294010}
   - component: {fileID: 7080777279480294008}
-  - component: {fileID: 1976865466000512422}
+  - component: {fileID: 7080777281033870362}
+  - component: {fileID: 7080777281033870363}
   m_Layer: 0
   m_Name: Minion
   m_TagString: Untagged
@@ -333,7 +334,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _minionSettings: {fileID: 11400000, guid: d448cc25643fcb94a98fcecc640cce8c, type: 2}
   _minionCollision: {fileID: 7080777279480294008}
-  _minionAnimator: {fileID: 1976865466000512422}
   _navMeshAgent: {fileID: 7080777279480294011}
   _rigidbody: {fileID: 7080777279480294010}
   _animator: {fileID: 7080777279671279461}
@@ -387,18 +387,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 509157761efc2524aaa5f0f2736a493f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1976865466000512422
-MonoBehaviour:
+--- !u!135 &7080777281033870362
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7080777279480293959}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe297bc690726f548b2088bbcd7c6f67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  serializedVersion: 2
+  m_Radius: 7
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &7080777281033870363
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7080777279480293959}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1.5378833
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.7710583, z: 0}
 --- !u!1 &7080777279506112739
 GameObject:
   m_ObjectHideFlags: 0
@@ -710,7 +725,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7080777279671279459}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 9617df354b6e0a14d81c56c914d36e0b, type: 2}
+  m_Avatar: {fileID: 9000000, guid: 55b77e41bc7ebc549b7556ad8e476543, type: 3}
   m_Controller: {fileID: 9100000, guid: 76a8f128f4bc69d41b64ef8750750672, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0

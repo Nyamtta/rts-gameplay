@@ -4,14 +4,24 @@ using UnityEngine;
 
 namespace roman.demidow.game
 {
+
     public interface IDamageable
     {
         public void TakeDamage(DamageType damageType, float damage);
+        
+        public CharacterType GetCharacterType();
     }
 
     public enum DamageType
     {
         Hit
     }
+
+    public enum CharacterType
+    { 
+        Ally,
+        Enemy
+    }
+
 }
 
