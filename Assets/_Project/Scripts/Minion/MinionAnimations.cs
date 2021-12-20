@@ -19,6 +19,20 @@ namespace roman.demidow.game
             _settings = minionSettings;
         }
 
+        public void SetWeaponState(bool takeWeapon)
+        {
+            Debug.Log(takeWeapon);
+
+            if(takeWeapon == true)
+            {
+                _animator.SetTrigger(_settings.TakeSwordTrigger);
+            }
+            else
+            {
+                _animator.SetTrigger(_settings.HideSwordTrigger);
+            }
+        }
+
         public void SetMoveVelocity(float moveVelocity)
         {
             _animator.SetFloat(_settings.MoveVevocity, moveVelocity);

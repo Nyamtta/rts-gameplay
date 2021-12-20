@@ -35,11 +35,11 @@ namespace roman.demidow.game
         {
             _stateMachine = new StateMachine();
             _minionAnimator = new MinionAnimations(_animator, _minionSettings);
-            //_minionAnimator.Init(_animator, _minionSettings);
             _minionCollision.Init();
 
             MinionMovementState movementState = new MinionMovementState(
-                _minionAnimator, _navMeshAgent, _minionSettings, transform);
+                _minionAnimator, _navMeshAgent, _minionSettings,
+                transform, _minionCollision);
             MinionIdleState idleState = new MinionIdleState();
 
             _stateMachine.AddTransition(idleState, movementState, IsMoveState());
@@ -65,6 +65,15 @@ namespace roman.demidow.game
 
         private void Update()
         {
+            if(Input.GetKeyDown(KeyCode.Q))
+            {
+                _minionAnimator.SetWeaponState(true);
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                _minionAnimator.SetWeaponState(false);
+            }
+
             _stateMachine.Tick();
         }
 

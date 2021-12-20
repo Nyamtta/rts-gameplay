@@ -16,6 +16,8 @@ public class MinionSettings : ScriptableObject
     [SerializeField] private string _isAttack;
     [SerializeField] private string _moveVevocity;
     [SerializeField] private string _deathTrigger;
+    [SerializeField] private string _hideSwordTrigger;
+    [SerializeField] private string _takeSwordTrigger;
 
     private float _defaultJumpDistans = 2f;
 
@@ -29,6 +31,8 @@ public class MinionSettings : ScriptableObject
     public string IsAttack { get => _isAttack; private set => _isAttack = value; }
     public string DeathTrigger { get => _deathTrigger; private set => _deathTrigger = value; }
     public AnimationCurve JumpCurve { get => _jumpCurve; private set => _jumpCurve = value; }
+    public string HideSwordTrigger { get => _hideSwordTrigger; private set => _hideSwordTrigger = value; }
+    public string TakeSwordTrigger { get => _takeSwordTrigger; private set => _takeSwordTrigger = value; }
 
     public event Action<MinionSettings> onUpdateValue;
 

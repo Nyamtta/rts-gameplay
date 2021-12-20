@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
@@ -13,18 +14,23 @@ namespace roman.demidow.game
         private NavMeshAgent _navMeshAgent;
         private MinionSettings _minionSettings;
         private Transform _minionTransform;
+        private MinionCollision _minionCollision;
         Vector3 _minionLastPos;
         private bool _isJump;
+        private List<IDamageable> _damageables; 
 
-        public MinionMovementState(MinionAnimations minionAnimator, NavMeshAgent navMeshAgent, MinionSettings minionSettings, Transform minionTransform)
+        public MinionMovementState(MinionAnimations minionAnimator, NavMeshAgent navMeshAgent, MinionSettings minionSettings, Transform minionTransform,
+            MinionCollision minionCollision)
         {
             _navMeshAgent = navMeshAgent;
             _animator = minionAnimator;
             _minionSettings = minionSettings;
             _minionTransform = minionTransform;
+            _minionCollision = minionCollision;
             _navMeshAgent.isStopped = true;
             _navMeshAgent.autoTraverseOffMeshLink = false;
             _isJump = false;
+            _damageables = new List<IDamageable>();
 
             SetNavMeshSettings(_minionSettings);
         }
@@ -32,10 +38,34 @@ namespace roman.demidow.game
         private void SubscribeEvent()
         {
             _minionSettings.onUpdateValue += SetNavMeshSettings;
+            _minionCollision.onEnemyClose += SetWeaponState;
+        }
+
+        private void SetWeaponState(IDamageable enemy, bool isClose)
+        {
+            if(isClose == true)
+            {
+                if(_damageables.Contains(enemy) == false)
+                {
+                    _damageables.Add(enemy);
+                }
+            }
+            else
+            {
+                if (_damageables.Contains(enemy) == true)
+                {
+                    _damageables.Remove(enemy);
+                }
+            }
+
+            bool isEnemyClose = _damageables.Count > 0;
+
+            _animator.SetWeaponState(isEnemyClose);
         }
 
         private void UnsubscribeEvent()
         {
+            _minionCollision.onEnemyClose -= SetWeaponState;
             _minionSettings.onUpdateValue -= SetNavMeshSettings;
         }
 

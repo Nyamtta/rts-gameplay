@@ -54,3 +54,5 @@ MonoBehaviour:
   _isAttack: Attack
   _moveVevocity: MoveVelocity
   _deathTrigger: Death
+  _hideSwordTrigger: HideSword
+  _takeSwordTrigger: TakeSword

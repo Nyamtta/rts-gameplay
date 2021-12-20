@@ -44,7 +44,6 @@ namespace roman.demidow.game
                     case CharacterType.Ally:
                         break;
                     case CharacterType.Enemy:
-
                         onEnemyClose?.Invoke(damageable, isEnter);
                         break;
                     default:
