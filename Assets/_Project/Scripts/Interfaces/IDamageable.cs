@@ -10,6 +10,9 @@ namespace roman.demidow.game
         public void TakeDamage(DamageType damageType, float damage);
         
         public CharacterType GetCharacterType();
+
+        public Vector3 GetPosition();
+
     }
 
     public enum DamageType

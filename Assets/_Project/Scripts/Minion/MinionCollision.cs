@@ -7,8 +7,8 @@ namespace roman.demidow.game
 {
     public class MinionCollision : MonoBehaviour
     {
-        public event Action<IDamageable, bool> onEnemyClose;
-        public event Action<IDamageable, bool> onAttackEnemy;
+        public event Action<IDamageable , bool> onEnemyClose;
+        public event Action<IDamageable, bool> onTouchEnemy;
 
         public void Init()
         {
@@ -27,6 +27,7 @@ namespace roman.demidow.game
 
         private void OnCollisionEnter(Collision collision)
         {
+            Debug.Log(collision.transform.name);
             OnCollision(collision, true);
         }
 
@@ -61,7 +62,7 @@ namespace roman.demidow.game
                     case CharacterType.Ally:
                         break;
                     case CharacterType.Enemy:
-                        onAttackEnemy?.Invoke(damageable, isEnter);
+                        onTouchEnemy?.Invoke(damageable, isEnter);
                         break;
                     default:
                         break;

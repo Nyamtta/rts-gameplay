@@ -17,7 +17,7 @@ namespace roman.demidow.game
         private MinionCollision _minionCollision;
         Vector3 _minionLastPos;
         private bool _isJump;
-        private List<IDamageable> _damageables; 
+        private List<IDamageable> _damageables;
 
         public MinionMovementState(MinionAnimations minionAnimator, NavMeshAgent navMeshAgent, MinionSettings minionSettings, Transform minionTransform,
             MinionCollision minionCollision)
@@ -41,6 +41,20 @@ namespace roman.demidow.game
             _minionCollision.onEnemyClose += SetWeaponState;
         }
 
+        private void UnsubscribeEvent()
+        {
+            _minionCollision.onEnemyClose -= SetWeaponState;
+            _minionSettings.onUpdateValue -= SetNavMeshSettings;
+        }
+
+        private void SetNavMeshSettings(MinionSettings minionSettings)
+        {
+            _navMeshAgent.speed = minionSettings.MoveSpeed;
+            _navMeshAgent.acceleration = minionSettings.Acceleration;
+            _navMeshAgent.angularSpeed = minionSettings.AngularSpeed;
+            _navMeshAgent.avoidancePriority = minionSettings.Priority;
+        }
+
         private void SetWeaponState(IDamageable enemy, bool isClose)
         {
             if(isClose == true)
@@ -61,20 +75,6 @@ namespace roman.demidow.game
             bool isEnemyClose = _damageables.Count > 0;
 
             _animator.SetWeaponState(isEnemyClose);
-        }
-
-        private void UnsubscribeEvent()
-        {
-            _minionCollision.onEnemyClose -= SetWeaponState;
-            _minionSettings.onUpdateValue -= SetNavMeshSettings;
-        }
-
-        private void SetNavMeshSettings(MinionSettings minionSettings)
-        {
-            _navMeshAgent.speed = minionSettings.MoveSpeed;
-            _navMeshAgent.acceleration = minionSettings.Acceleration;
-            _navMeshAgent.angularSpeed = minionSettings.AngularSpeed;
-            _navMeshAgent.avoidancePriority = minionSettings.Priority;
         }
 
         public void Tick()

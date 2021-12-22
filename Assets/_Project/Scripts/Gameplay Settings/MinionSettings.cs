@@ -4,12 +4,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Minion Settings", menuName = "Gamepley Settings/Minion Settings")]
 public class MinionSettings : ScriptableObject
 {
-    [SerializeField] private float _moveSpeed;
-    [SerializeField] private float _angularSpeed;
-    [SerializeField] private float _acceleration;
-    [SerializeField] private float _timeDefaultJump;
-    [SerializeField] private int _priority;
+    [SerializeField] private float _moveSpeed = 3.5f;
+    [SerializeField] private float _angularSpeed = 500f;
+    [SerializeField] private float _acceleration = 100f;
+    [SerializeField] private float _timeDefaultJump = 0.3f;
+    [SerializeField] private int _priority = 50;
+    [SerializeField] private float _attackDistance = 0.5f;
     [SerializeField] private AnimationCurve _jumpCurve;
+    [SerializeField] private GameObject _startWeapon;
 
     [Header("Animator Parameters")]
     [SerializeField] private string _jumpTrigger;
@@ -21,6 +23,8 @@ public class MinionSettings : ScriptableObject
 
     private float _defaultJumpDistans = 2f;
 
+    public event Action<MinionSettings> onUpdateValue;
+    
     public float MoveSpeed { get => _moveSpeed; set { _moveSpeed = value; onUpdateValue?.Invoke(this); } }
     public float AngularSpeed { get => _angularSpeed; set { _angularSpeed = value; onUpdateValue?.Invoke(this); } }
     public float Acceleration { get => _acceleration; set { _acceleration = value; onUpdateValue?.Invoke(this); } }
@@ -33,8 +37,8 @@ public class MinionSettings : ScriptableObject
     public AnimationCurve JumpCurve { get => _jumpCurve; private set => _jumpCurve = value; }
     public string HideSwordTrigger { get => _hideSwordTrigger; private set => _hideSwordTrigger = value; }
     public string TakeSwordTrigger { get => _takeSwordTrigger; private set => _takeSwordTrigger = value; }
-
-    public event Action<MinionSettings> onUpdateValue;
+    public GameObject StartWeapon { get => _startWeapon; private set => _startWeapon = value; }
+    public float AttackDistance { get => _attackDistance; private set => _attackDistance = value; }
 
     public float GetTimeForGump(Vector3 from, Vector3 to)
     {

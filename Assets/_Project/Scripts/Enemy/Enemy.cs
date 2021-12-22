@@ -25,5 +25,10 @@ namespace roman.demidow.game
         {
             return _characterType;
         }
+
+        public Vector3 GetPosition()
+        {
+            return transform.position;
+        }
     }
 }
