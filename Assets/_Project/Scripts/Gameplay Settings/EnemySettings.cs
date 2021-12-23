@@ -28,7 +28,7 @@ public class EnemySettings : ScriptableObject
     public string IsAttack { get => _isAttack; private set => _isAttack = value; }
     public string DeathTrigger { get => _deathTrigger; private set => _deathTrigger = value; }
     public AnimationCurve JumpCurve { get => _jumpCurve; private set => _jumpCurve = value; }
-    public float HitPoint { get => _hitPoint; set => _hitPoint = value; }
+    public float HitPoint { get => _hitPoint; private set => _hitPoint = value; }
 
     public event Action<EnemySettings> onUpdateValue;
 

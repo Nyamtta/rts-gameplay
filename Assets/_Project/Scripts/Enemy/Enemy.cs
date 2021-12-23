@@ -18,7 +18,13 @@ namespace roman.demidow.game
 
         public virtual void TakeDamage(DamageType damageType, float damage)
         {
+            Debug.Log(_hitPoint);
             _hitPoint -= damage;
+
+            Debug.Log("hit");
+
+            if (_hitPoint <= 0)
+                Debug.Log("Dye");
         }
 
         public CharacterType GetCharacterType()

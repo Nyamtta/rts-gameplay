@@ -17,6 +17,7 @@ MonoBehaviour:
   _acceleration: 100
   _timeDefaultJump: 0.3
   _priority: 50
+  _attackDistance: 1.5
   _jumpCurve:
     serializedVersion: 2
     m_Curve:
@@ -53,7 +54,8 @@ MonoBehaviour:
   _startWeapon: {fileID: 335394148137676241, guid: 8d870a570d03f4d4e949ac555010e085, type: 3}
   _jumpTrigger: Jump
   _isAttack: Attack
-  _moveVevocity: MoveVelocity
+  _moveVelocity: MoveVelocity
+  _attackVelocity: AttackVelocity
   _deathTrigger: Death
   _hideSwordTrigger: HideSword
   _takeSwordTrigger: TakeSword

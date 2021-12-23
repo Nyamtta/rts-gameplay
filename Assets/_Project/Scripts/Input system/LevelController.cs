@@ -8,23 +8,23 @@ namespace roman.demidow.game
     public class LevelController : MonoBehaviour
     {
         [SerializeField] private MoveInput _moveInput;
-        [SerializeField] private Minion _playerController;
+        [SerializeField] private MiniopnHolder _miniopnHolder;
 
         private void Start()
         {
-            _playerController.Init();
+            _miniopnHolder.Init();
 
-            SubscribeEvents();
+            //SubscribeEvents();
         }
 
-        private void SubscribeEvents()
-        {
-            _moveInput.movePoint += OnMove;
-        }
+        //private void SubscribeEvents()
+        //{
+        //    _moveInput.movePoint += OnMove;
+        //}
 
-        private void OnMove(Vector3 movePosition)
-        {
-            _playerController.SetMovePosition(movePosition);
-        }
+        //private void OnMove(Vector3 movePosition)
+        //{
+        //    _playerController.SetMovePosition(movePosition);
+        //}
     }
 }

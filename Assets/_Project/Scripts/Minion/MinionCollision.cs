@@ -7,69 +7,79 @@ namespace roman.demidow.game
 {
     public class MinionCollision : MonoBehaviour
     {
-        public event Action<IDamageable , bool> onEnemyClose;
-        public event Action<IDamageable, bool> onTouchEnemy;
+        public delegate void CollisionData(IDamageable damageableObject, bool isEnterTrigger);
+        
+        public event CollisionData onSightZone;
+        public event CollisionData onAttacZone;
+
+
+        private List<IDamageable> _inSightZone;
+        private List<IDamageable> _inAttacZone;
 
         public void Init()
         {
-
+            _inSightZone = new List<IDamageable>();
+            _inAttacZone = new List<IDamageable>();
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            OnTrigger(other, true);
+            CheckIsObjectEnemy(other, true);
         }
 
         private void OnTriggerExit(Collider other)
         {
-            OnTrigger(other, false);
+            CheckIsObjectEnemy(other, false);
         }
 
-        private void OnCollisionEnter(Collision collision)
-        {
-            Debug.Log(collision.transform.name);
-            OnCollision(collision, true);
-        }
-
-        private void OnCollisionExit(Collision collision)
-        {
-            OnCollision(collision, false);
-        }
-
-        private void OnTrigger(Collider collider, bool isEnter)
+        private void CheckIsObjectEnemy(Collider collider, bool isEnter)
         {
             if (collider.TryGetComponent<IDamageable>(out IDamageable damageable) == true)
             {
-                switch (damageable.GetCharacterType())
+                if (damageable.GetCharacterType() != CharacterType.Enemy)
+                    return;
+
+                if(isEnter == true)
                 {
-                    case CharacterType.Ally:
-                        break;
-                    case CharacterType.Enemy:
-                        onEnemyClose?.Invoke(damageable, isEnter);
-                        break;
-                    default:
-                        break;
+                    AddEnemy(damageable);
+                }
+                else
+                {
+                    RemoveEnemy(damageable);
                 }
             }
         }
 
-        private void OnCollision(Collision collision, bool isEnter)
+        private void AddEnemy(IDamageable damageable)
         {
-            if (collision.transform.TryGetComponent<IDamageable>(out IDamageable damageable) == true)
+            bool enemyOnZone = true;
+
+            if (_inSightZone.Contains(damageable) == true)
             {
-                switch (damageable.GetCharacterType())
-                {
-                    case CharacterType.Ally:
-                        break;
-                    case CharacterType.Enemy:
-                        onTouchEnemy?.Invoke(damageable, isEnter);
-                        break;
-                    default:
-                        break;
-                }
+                _inAttacZone.Add(damageable);
+                onAttacZone.Invoke(damageable, enemyOnZone);
+            }
+            else
+            {
+                _inSightZone.Add(damageable);
+                onSightZone?.Invoke(damageable, enemyOnZone);
             }
         }
 
+        private void RemoveEnemy(IDamageable damageable)
+        {
+            bool enemyOnZone = false;
 
+            if (_inAttacZone.Contains(damageable) == true)
+            {
+                _inAttacZone.Remove(damageable);
+                onAttacZone.Invoke(damageable, enemyOnZone);
+            }
+            else if(_inSightZone.Contains(damageable) == true)
+            {
+                _inSightZone.Remove(damageable);
+                onSightZone?.Invoke(damageable, enemyOnZone);
+            }
+        }
     }
 }

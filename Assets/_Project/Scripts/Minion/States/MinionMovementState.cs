@@ -38,12 +38,12 @@ namespace roman.demidow.game
         private void SubscribeEvent()
         {
             _minionSettings.onUpdateValue += SetNavMeshSettings;
-            _minionCollision.onEnemyClose += SetWeaponState;
+            _minionCollision.onSightZone += SetWeaponState;
         }
 
         private void UnsubscribeEvent()
         {
-            _minionCollision.onEnemyClose -= SetWeaponState;
+            _minionCollision.onSightZone -= SetWeaponState;
             _minionSettings.onUpdateValue -= SetNavMeshSettings;
         }
 
