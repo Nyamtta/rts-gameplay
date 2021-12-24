@@ -10,8 +10,19 @@ public class MoveInput : MonoBehaviour
 
     public event Action<Vector3> movePoint;
     private GameObject _pointerArrowGO;
+    private MinionControll _minionControll;
 
     private const float MAX_RAY_DISTANCE = 500f;
+
+    private void Start()
+    {
+        _minionControll = new MinionControll();
+    }
+
+    private void OnEnable()
+    {
+        
+    }
 
     private void Update()
     {

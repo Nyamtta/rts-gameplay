@@ -1,0 +1,50 @@
+{
+    "name": "MinionControll",
+    "maps": [
+        {
+            "name": "Land",
+            "id": "c95178a2-440c-424d-892f-fedafe28b7a2",
+            "actions": [
+                {
+                    "name": "Meve",
+                    "type": "Button",
+                    "id": "22eb7d2a-d9fb-4330-9c20-1cb25a6318d6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "18881cd6-ddaf-418b-a7d9-9235e2e5ad8c",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Meve",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "PC",
+            "bindingGroup": "PC",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}
